@@ -3,14 +3,40 @@ I plan on refactoring this to english, but it is not a priority right now.
 It should run, since the external contracts of the API are tailored for this suite.
 
 ## Running the tests
-You can run the test suite with the following command:
+If you want, you can add the following profile to the pom: 
+
+```xml
+<profile>
+    <id>gatling-suite</id>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.4.1</version>
+                <executions>
+                    <execution>
+                        <id>run</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <mainClass>com.akkamelo.api.gatling.GatlingRunner</mainClass>
+                    <classpathScope>test</classpathScope>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</profile>
+```
+
+After that, you can run the test suite with the following command:
 ```bash
 mvn test -Pgatling-suite
 ```
 This will run the tests and generate a report in the `target/gatling` directory.
 
-You can also run from your IDE if you wish, running the `GatlingRunner` class.
-
-Keep in mind all the tests need to compile.
-
-Check pom.xml for more information on the profile.
+You can also run from your IDE if you wish, running the `GatlingRunner` class, or find another way entirely to run this.
