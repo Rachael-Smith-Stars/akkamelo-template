@@ -45,4 +45,9 @@ class TransactionSpec extends AnyFlatSpec {
     val credit = Credit(200, "1234567890")
     assert(credit.description == "1234567890")
   }
+
+  it should "have a timestamp" in {
+    val transaction: Transaction = Credit(200, "desc")
+    assert(transaction.timestamp)
+  }
 }
