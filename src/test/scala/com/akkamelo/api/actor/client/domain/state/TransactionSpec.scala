@@ -1,6 +1,6 @@
 package com.akkamelo.api.actor.client.domain.state
 
-import com.akkamelo.api.actor.client.domain.exception.InvalidTransactionException
+//import com.akkamelo.api.actor.client.domain.exception.InvalidTransactionException
 import org.scalatest.flatspec.AnyFlatSpec
 
 class TransactionSpec extends AnyFlatSpec {
@@ -25,29 +25,29 @@ class TransactionSpec extends AnyFlatSpec {
   }
 
   it should "must have a positive value" in {
-    assertThrows[InvalidTransactionException] {
+    assertThrows[IllegalArgumentException] {
       Debit(-100, "desc")
     }
-    assertThrows[InvalidTransactionException] {
+    assertThrows[IllegalArgumentException] {
       Credit(-100, "desc")
     }
     val credit = Credit(200, "desc")
     assert(credit.value == 200)
   }
 
-  it should "must have a description with size between 1 and 10" in {
-    assertThrows[InvalidTransactionException] {
-      Debit(100, "")
+    it should "must have a description with size between 1 and 10" in {
+      assertThrows[IllegalArgumentException] {
+        Debit(100, "")
+      }
+      assertThrows[IllegalArgumentException] {
+        Debit(100, "12345678901")
+      }
+      val credit = Credit(200, "1234567890")
+      assert(credit.description == "1234567890")
     }
-    assertThrows[InvalidTransactionException] {
-      Debit(100, "12345678901")
-    }
-    val credit = Credit(200, "1234567890")
-    assert(credit.description == "1234567890")
-  }
 
-  it should "have a timestamp" in {
-    val transaction: Transaction = Credit(200, "desc")
-    assert(transaction.timestamp)
-  }
+    it should "have a timestamp" in {
+      val transaction: Transaction = Credit(200, "desc")
+      assert(transaction.timestamp().isInstanceOf[Long])
+    }
 }

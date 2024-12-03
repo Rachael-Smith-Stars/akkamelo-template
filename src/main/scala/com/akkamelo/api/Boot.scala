@@ -3,6 +3,8 @@ package com.akkamelo.api
 import akka.actor.ActorSystem
 import com.akkamelo.api.http.{ClientService, Server}
 
+import scala.concurrent.ExecutionContext.Implicits.global
+
 object Boot extends App {
   println("Starting Akkamelo")
   implicit val system: ActorSystem = ActorSystem("akkamelo")

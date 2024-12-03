@@ -1,3 +1,7 @@
 package com.akkamelo.api.actor.client.domain.state
 
-class Transaction
+trait Transaction {
+  def value(): Int
+  def timestamp(): Long
+}
+
