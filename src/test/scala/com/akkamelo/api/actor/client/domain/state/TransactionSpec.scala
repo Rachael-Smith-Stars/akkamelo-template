@@ -1,6 +1,5 @@
 package com.akkamelo.api.actor.client.domain.state
 
-//import com.akkamelo.api.actor.client.domain.exception.InvalidTransactionException
 import org.scalatest.flatspec.AnyFlatSpec
 
 class TransactionSpec extends AnyFlatSpec {
